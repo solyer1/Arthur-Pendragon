@@ -1,0 +1,519 @@
+{
+  "stats": {
+    "class": "Sacred Paladin",
+    "dexterity": 19,
+    "wisdom": 12,
+    "constitution": 15,
+    "charisma": 20,
+    "strength": 15,
+    "intelligence": 12,
+    "armorClass": 14,
+    "health": 190,
+    "alignment": "Neutral Good"
+  },
+  "passives": [
+    {
+      "name": "Oaths Of The Kings",
+      "description": [
+        "หลังจาก engaged combat ได้รับ [Sovereign Will] 1 หน่วย / turn",
+        "ทุกๆ 5 ดาเมจที่ทีมทำได้ จะได้รับ 1 [Sovereign Will] สุงสุด 5 หน่วย / turn",
+        "เมื่อเพื่อนรวมทีมเสียเลือด 10 หน่อย ได้รับ 1 [Sovereign Will] ต่อคน"
+      ]
+    },
+    {
+      "name": "The Thirdteens Restraints of the Round Table",
+      "description": [
+        "The enemy must not be an elemental - Marius Mordoch",
+        "The enemy must be more powerful than oneself",
+        "The battle must not involve personal gain",
+        "The battle must not be inhumane",
+        "The battle must not be against one pure of heart",
+        "The battle must not be against Humanity",
+        "The battle must be to save the world",
+        "The battle must be to live",
+        "The battle must be to defend human order",
+        "The battle must be one-on-one",
+        "The battle must be one against evil",
+        "The battle must be for truth",
+        "The battle must be an honorable one",
+        "Oneself must know the meaning to be king"
+      ]
+    },
+    {
+      "name": "The Influence Of Destined King's",
+      "description": [
+        { "text": "Arthur และพันธมิตรทุกคนที่มี DEX น้อยกว่าหรือเท่ากับ Arthur ได้รับ", "children": [
+          "**+2 Damage Rolls**",
+          "**+10% Damage**",
+          { "text": "พันธมิตรที่มี DEX สูงที่สุดในปาร์ตี้ 1 คน", "children": ["ได้รับโบนัสนี้ด้วย"] },
+          { "text": "สมาชิกทุกคนในทีมได้รับ", "children": ["**Despair Resistance**"] }
+        ]},
+        "เมื่อเข้ารวม battle สมาชิกทุกคนในทีมได้รับ [Inspired] เป็นเวลา 1 Turn",
+        "เมื่อ Arthur โรลได้ 17-20 ในสถานะ [Oaths of northwind's paladin : Arthur pendragon] สมาชิกทุกคนในทีมได้รับ [Inspired] 1 Turn"
+      ]
+    },
+    {
+      "name": "The Courage To Protect Others",
+      "description": [
+        { "text": "หากมีสมาชิกในทีม HP ต่ำกว่า 50%", "children": [
+          "ได้รับ **+1 Universal Roll**",
+          "โบนัสเพิ่มตามจำนวนคนที่เข้าเงื่อนไข",
+          "สูงสุด **+3**"
+        ]},
+        { "text": "หากมีสมาชิกในทีม HP ต่ำกว่า 25%", "children": [
+          "ได้รับ **+1 Damage Roll**",
+          "โบนัสเพิ่มตามจำนวนคนที่เข้าเงื่อนไข",
+          "สูงสุด **+3**"
+        ]},
+        { "text": "หากมีสมาชิกในทีมเสียชีวิตอย่างน้อย 1 คน", "children": [
+          { "text": "ได้รับ", "children": ["**+3 Universal Rolls**", "**+3 Damage Rolls**"] }
+        ]},
+        "Arthur สามารถโรลป้องกันแทนพันธมิตรที่ป้องกันล้มเหลวได้",
+        "จำกัด 1 คน / Turn",
+        { "text": "การป้องกันที่โรลแทนได้รับ", "children": ["**+5 Rolls**"] }
+      ]
+    },
+    {
+      "name": "Inherited Of The Wind's",
+      "description": [
+        "ผู้สืบทอดแห่งวายุ สามารถแปลงเป็นลมได้เพื่อเคลื่อนที่หรือพรางตัว",
+        "และสามารถอัดลมรอบตัวเพื่อทำให้วัตถุ ล่องหนได้ หากเป็นอาวุธ อาวุธนั้นจะได้รับเอฟเฟค [Compressed Winds]",
+        "ความเร็วการเคลื่อนที่ของเขาสามารถเร่งได้เร็วที่สุดอยู่ที่ **2,470 km/h** หรือ สองเท่าของความเร็วเสียง",
+        "เมื่อเข้าสุ้ battle ได้รับ [Compressed Winds]",
+        "Arthur จะได้ Advantage ในการ หนี,ไล่ตาม,การสำรวจ และ อื่นๆที่ต้องการเคลื่อนที่",
+        { "text": "หาก Arthur หลบหนีจากการต่อสู้หรือการไล่ล่าได้สำเร็จ", "children": [
+          "ศัตรูจะไม่สามารถไล่ตามทันได้ เว้นแต่จะมีความเร็วสูงสุด **เทียบเท่าหรือมากกว่า Arthur** หรือมีความสามารถที่สามารถขัดขวาง/ควบคุมการเคลื่อนที่ของเขาได้"
+        ]}
+      ]
+    },
+    {
+      "name": "The Alliance of Nature's",
+      "description": [
+        "ทุกสิ่งมีชีวิตสามารถ สื่อสารกับ Arthur ได้ ไม่ว่าจะใช้ภาษาเดียวกันหรือไม่",
+        { "text": "สิ่งมีชีวิตที่ Hostile จะเป็น Neutral ต่อหน้า Arthur", "children": [
+          "สิ่งมีชีวิตที่ Neutral จะเป็น Friendly ต่อหน้า Arthur"
+        ]},
+        "Arthur สามารถเชื่อมการมองเห็นและการสัมผัสกับสิ่งมีชีวิตในระยะ 500 กิโลเมตรได้",
+        "การ Tame,การต่อรอง,การพูดคุย ต่อสิ่งมีชีวิตจะRoll ไม่ต่ำกว่า 15",
+        "หาก Tame สำเร็จสิ่งมีชีวิจนั้นสามารถเลือกได้ว่าจะเข้าไปอยู่ในมิติพิเศษ [Sanctuary of the King] ของ Arthur หรือไม่",
+        "Arthur สามรถเลือก สิ่งมี่ชีวิตที่ Tamed แล้ว เพื่ออันเชิญออกมาได้ทุกที่ ไม่ว่าสิ่งมีชีวิตนั้น จะอยู่ใน Sanctuary of the King หรือ ที่ไหนก็ตาม ตราบใดที่ พันธยังอยู่"
+      ]
+    },
+    {
+      "name": "Le Morte d'Arthur",
+      "description": [
+        { "text": "เมื่อ พันธมิตร ได้รับ Fatal Damage", "children": [
+          "Arthur ได้รับ Immunity ต่อการโจมตีนั้น และ เข้าไปรับการโจมตีนั้น, Fatal Damage ต่อพันธมิตรนั้นจะไร้ผล",
+          "หลังจากนั้น Arthur ฮีลให้ พันธมิตร ผู้นั้น **50% ของ Max Hp**",
+          "1 ครั้งต่อการต่อสู้"
+        ]},
+        { "text": "เมื่อ พันธมิตร ได้รับ Fatal Damage และ Arthur เลือกที่จะรับดาเมจ", "children": [
+          "Arthur สลับ Hp ของตน และ ของพันธมิตร",
+          "และ ฮีลให้ พันธมิตร ผู้นั้น **20% ของ Max Hp** พร้อม และ **+3 Universal Roll**"
+        ]},
+        "เมื่อ Arthur ได้รับ Fatal Damage เข้าสู่สถานะ [Unyielding Will]",
+        "เมื่อ Arthur สิ้นชีพ วิญญานเข้า สู่ Bottle of Heroic Soul"
+      ]
+    }
+  ],
+  "uniqueStatus": [
+    {
+      "name": "Sovereign Will",
+      "description": [
+        "**Max 30**",
+        { "text": "ทุกๆ 5 หน่วย ได้รับ **+1 roll UNi** สุงสุด 3" },
+        { "text": "ทุกๆ 10 หน่วย ได้รับ **+1 roll dmg** สุงสุด 3" },
+        { "text": "ทุกๆ 15 หน่วย ได้รับ **15% Dmg resistance** สุงสุด 30%" },
+        "เอฟเฟคนี้ใช้ในการปลดพลังrune และ เสริมพลังskill"
+      ]
+    },
+    {
+      "name": "Compressed Winds",
+      "description": [
+        "**+ 2 Roll Uni**",
+        "ทุกครั้งที่โจมตี แปะสถานนะ 1 [Slicing Gale]",
+        "การหลบ หรือ parry ของ ศัตรูจะได้ รับ Disadvantage"
+      ]
+    },
+    {
+      "name": "Oaths of northwind's paladin : Arthur pendragon",
+      "description": [
+        "การโจมตีแปะ 1 [Slicing Gale] ถ้าเป้าหมายมี [Slicing Gale] อยู่แล้ว",
+        "ได้รับ resistance 1 ต่อผู้ที่มีบาปหรือชั่ว",
+        "ในขณะที่สถานะนี้คงอยู่ **30%** ของ dmg ที่ทำจะเป็น **True Dmg**",
+        "ในขณะที่สถานะนี้คงอยู่  **70%** ของ dmg ที่ทำจะเป็น **Holy Dmg**",
+        "หากเป้าหมายมี [Slicing Gale] ทำ dmg เสริมเป็น **40% wind dmg** ของดาเมจต้น"
+      ]
+    },
+    {
+      "name": "Slicing Gale",
+      "description": [
+        "รับดาเมจมากขึ้น **10%** (ไม่สามารถทับซ้อนได้)",
+        "ทำดาเมจ **(Stack(s) x 2)** ทุกturn",
+        "หมดอายุ 1 Stacks หลังจาก 2 turn",
+        "หากถูกแปะทับก่อนหมดอายุ จะนับ turn ใหม่",
+        "ทับซ่อนได้สูงสุด **20**"
+      ]
+    },
+    {
+      "name": "Holy flame: Purgation",
+      "description": [
+        "\"With This Sacred Flame, let the guilty burn beneath the weight of their own sins.\"",
+        "**Max Stacks: 10**",
+        { "text": "หากผู้ที่มีสถานะนี้เป็น **ศัตรู** และมีคุณสมบัติ Evil, Sinner หรือ Unholy", "children": [
+          "เมื่อจบ Turn จะได้รับ **Holy Damage** เท่ากับ **3% ของ Max HP** ต่อ 1 Stack",
+          "การฟื้นฟู HP ลดลง **5%** ต่อ 1 Stack"
+        ]},
+        { "text": "หากผู้ที่มีสถานะนี้เป็น **พันธมิตร** และ ไม่มีคุณสมบัติ Evil, Sinner หรือ Unholy", "children": [
+          "เมื่อจบ Turn จะฟื้นฟู HP **5% ของ Max HP** ต่อ 1 Stack",
+          "เมื่อสะสมครบ **5 Stacks** สามารถใช้ 3 Stacks เพื่อล้าง Debuff 1 อย่าง",
+          "สถานะ Burn ที่ได้รับจะถูกแปลงเป็น Holy Flame: Purgation แทน",
+          "สถานะนี้จะไม่ถูกดับได้เหมือนไฟปกติ"
+        ]},
+        "ทุก 2 Turns ลบ 1 Stacks"
+      ]
+    },
+    {
+      "name": "Unyielding Will",
+      "description": [
+        "HP จะไม่สามารถลดต่ำกว่า 1",
+        "ได้รับ **+2 Universal Rolls**",
+        "ได้รับ **+2 Damage Rolls**",
+        "ทุก Action ได้รับ **Advantage**",
+        "เมื่อเข้าสู่สถานะลด 3 Cooldown ของทุก Skills",
+        "ตลอดสถานะ พันธมิตรทุกคนได้รับ [Inspired]",
+        "ไม่สามารถได้รับ Heal, Shield หรือการฟื้นฟู HP ทุกชนิด",
+        "ไม่สามารถได้รับ Debuff ทุกชนิด",
+        "การได้รับ [Sovereign Will] เพิ่มขึ้น **2 เท่า**",
+        { "text": "ทุกครั้งที่ Arthur ปกป้องพันธมิตรสำเร็จ", "children": [
+          "พันธมิตรที่ได้รับการปกป้อง ฟื้นฟู HP **10% ของ Max HP**"
+        ]},
+        { "text": "เมื่อจบ Turn 3 หาก Arthur มี 15 [Sovereign Will] ขึ้นไป", "children": [
+          "ใช้ 15 [Sovereign Will] เพื่อยืดระยะเวลาของสถานะออก 1 Turn",
+          "ใช้ได้สูงสุด **2 ครั้ง**"
+        ]},
+        { "text": "หาก Arthur สามารถคงอยู่ในสถานะนี้ครบ **5 Turns**", "children": [
+          "ล้าง Debuff ทั้งหมด",
+          "ลบสถานะ [Unyielding Will]",
+          "ฟื้นฟู HP **50% ของ Max HP**",
+          "ได้รับ **+2 Universal Rolls** ตลอดการต่อสู้",
+          "ได้รับ **+1 Damage Rolls** ตลอดการต่อสู้"
+        ]},
+        { "text": "**Duration**", "children": [
+          "ระยะเวลาเริ่มต้น **3 Turns**",
+          "เมื่อสถานะสิ้นสุด หาก Arthur ยังอยู่ในสถานะ [Unyielding Will] — Arthur จะ**เสียชีวิตทันที**"
+        ]}
+      ]
+    },
+    {
+      "name": "Inspired",
+      "description": [
+        "สถานะนี้จะไม่สามารถติดใส่ตนเองได้ ทำได้แค่จากผลของเพื่อนร่วมทีมเท่านั้น",
+        "เมื่อมีสถานะนี้ การทำ action ที่มีผลประโยชต่อคนๆนั้น **+4 universal roll**",
+        "เมื่อทำการ synergy กันจะให้ **advantage**",
+        "จะไม่มีวันได้ universal roll ต่ำกว่า **10**"
+      ]
+    },
+    {
+      "name": "Sanctuary of the King",
+      "description": ["มิติพิเศษของ Arthur"]
+    },
+    {
+      "name": "Slow",
+      "description": ["สถานะ Slow (ลดความเร็วการเคลื่อนที่)"]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Blade Of Wind's",
+      "level": 0,
+      "type": "Normal Attack",
+      "description": ["**1d10**", "ได้รับ 1 [Sovereign Will]"]
+    },
+    {
+      "name": "Gale Step",
+      "level": 1,
+      "type": "Skill",
+      "cooldown": "3 turns",
+      "description": ["พุ่งตัวไปฟัน **1d12** turn หน้าได้รับ **Advantage**"]
+    },
+    {
+      "name": "Smite of the North",
+      "level": 2,
+      "type": "Skill",
+      "cooldown": "4 turns",
+      "description": ["ข้าม Turn และ Turn ต่อไป ทำดาเมจเพิ่มเติม **1d10** และแปะ 1 [Slicing Gale]"]
+    },
+    {
+      "name": "Holy Flame Ignition",
+      "level": 3,
+      "type": "Skill",
+      "cooldown": "4 turns",
+      "description": ["แปะ 3 [Holy flame: Purgation] ใส่เป้าหมาย"]
+    },
+    {
+      "name": "Shine Bright Like Morning Star",
+      "level": 4,
+      "type": "Skill",
+      "cooldown": "5 turns",
+      "description": [
+        "อาร์เทอร์ชู ดาบขึ้น เผยให้เห็นแสงศักดิ์สิทธิ์",
+        "**Aoe**",
+        "ล้างสถานะ Invisible และ Flight ของ ศัตรูทั้งหมด",
+        "ศัตรูที่โดนล้างสถานะรับ ดามเมจ **2d8**",
+        "หากไม่ได้โดนล้างสถานะ รับดาเมจ **1d8**"
+      ]
+    },
+    {
+      "name": "Shine Bright Like Morning Star: Gaze's of Ishtar",
+      "level": 4,
+      "type": "Skill",
+      "cooldown": "6 turns",
+      "cost": "8 [Sovereign Will]",
+      "description": [
+        "*ข้าขอประจักษ์แด่เทพีแห่งความงาม ผู้เป็นที่รัก ว่าพวกเจ้าจะไม่อาจหลุดจากสายตาของนาง*",
+        "**Aoe**",
+        "ล้างสถานะ Invisible และ Flight ของ ศัตรูทั้งหมด",
+        "ตลอด 5 turns ศัตรุไม่สามารถเข้าสู้สถานะ Invisible และ Flight",
+        "ศัตรูติด **Stun** ใน Turns หน้า",
+        "ศัตรูที่โดนล้างสถานะรับ ดามเมจ **4d8**",
+        "หากไม่ได้โดนล้างสถานะ รับดาเมจ **2d8**"
+      ]
+    },
+    {
+      "name": "Rune Activation",
+      "level": 10,
+      "type": "Skill",
+      "description": [
+        "เปิดใช้ Rune โดยแต่ละ Rune จะใช้ [Sovereign Will] ไม่เหมือนกัน",
+        "**ᛏ** - Tiwaz | Justice / Sacrifice",
+        "**ᚨ** - Ansuz | Divine Authority",
+        "**ᛉ** - Algiz | Protection",
+        "**ᛋ** - Sowilo | Sun / Victory",
+        "**ᛟ** - Othala | Heritage"
+      ]
+    },
+    {
+      "name": "Strike Air",
+      "level": 13,
+      "type": "Skill",
+      "cooldown": "5 turns",
+      "description": [
+        "การปล่อยลมประทุจากดาบไปข้างหน้า",
+        "Base Damage **2d10** + 2 [Slicing Gale] Aoe 1 target",
+        { "text": "สามารถเลือกจ่าย [Sovereign Will] เพื่อเสริมพลัง", "children": [
+          "จ่าย 3 [Sovereign Will] เพื่อ เพิ่ม **1d10** + 1 [Slicing Gale] + 1 Aoe target"
+        ]}
+      ]
+    },
+    {
+      "name": "Strike Air: Hammer of the Wind King",
+      "level": 13,
+      "type": "Skill",
+      "cooldown": "5 turns",
+      "description": [
+        "เมื่อจ่าย [Sovereign Will] มากกว่า **15** หน่วยขึ้นไป",
+        "Base Damage **4d10** + 4 [Slicing Gale] Aoe 4 target",
+        "Turn ต่อไป ศัตรู รับดาเมจเพิ่มขึ้น **20%** เป็นเวลา 2 Turns",
+        "จ่าย 3 [Sovereign Will] เพื่อ เพิ่ม **2d10** + 2 [Slicing Gale] + 2 Aoe Target",
+        "Trigger [Slicing Gale]"
+      ]
+    },
+    {
+      "name": "Wind's Of Norths",
+      "level": 14,
+      "type": "Skill",
+      "cooldown": "6 Turns",
+      "description": [
+        "Arthur เรียกสายลมเชี่ยวและรุนแรง",
+        "ทำ Damage **2d12** Aoe และ แปะ [Slow] 4 หน่วยเป็นเวลา 2 Turns กับ [Slicing Gale] 4 หน่วย"
+      ]
+    },
+    {
+      "name": "Wind's of North: Call Of Holy Flame",
+      "level": 14,
+      "type": "Skill",
+      "cooldown": "8 turns",
+      "cost": "7 [Sovereign Will]",
+      "description": [
+        "Arthur เรียกสายลมแห่งไฟศักดิ์สิทธิ์",
+        "ทำ Damage **4d12** Aoe และ แปะ [Slow] 4 หน่วยเป็นเวลา 2 Turns กับ [Holy flame: Purgation] 3 หน่วย",
+        "พันธมิตรได้รับ [Holy flame: Purgation] 3 หน่วย"
+      ]
+    },
+    {
+      "name": "Mana Disintegration: Silce the gale",
+      "level": 15,
+      "type": "Skill",
+      "cooldown": "8 Turns",
+      "description": [
+        "ทำดาเมจ **2d10**",
+        "ลบ stack(s) [Slicing Gale] ทั้งหมด",
+        "และทำดาเมจ **(stack(s) * 2) * stack(s)**"
+      ]
+    },
+    {
+      "name": "Mana Disintegration: Unleshed The Curve of Blade",
+      "level": 16,
+      "type": "Skill",
+      "cooldown": "10 Turns",
+      "cost": "15 [Sovereign Will]",
+      "description": [
+        "Requird [Compressed Winds]",
+        "ทำดาเมจ **4d12**",
+        "ใส่ 3 เป้าหมาย",
+        "ลบ [Compressed Winds] แทนที่ด้วย [Oaths of northwind's paladin : Arthur pendragon]",
+        "แปะ 6 [Slicing Gale]"
+      ]
+    },
+    {
+      "name": "Rounds of Pendragon",
+      "level": 17,
+      "type": "Skill",
+      "cooldown": "8 Turns",
+      "duration": "5 Turns",
+      "description": [
+        "อาร์เทอร์ประกาศนำการบุกของเหล่าอัศวิน และแต่งตั้งพันธมิตร 3 คน ให้เป็นผู้ร่วมออกรบเคียงข้างราชา",
+        "เลือกพันธมิตร 3 คน",
+        { "text": "พันธมิตรที่ถูกเลือกได้รับ", "children": [
+          "**Extra Action** 1 ครั้ง/Turn",
+          "**+2 Universal Rolls**"
+        ]},
+        { "text": "ทุกครั้งที่พันธมิตรที่ถูกเลือกโจมตีสำเร็จ", "children": [
+          "Arthur จะทำ Follow-up Attack ใส่เป้าหมายเดียวกันทันที",
+          "สร้างความเสียหาย **2d8**",
+          "การโจมตีนี้ ไม่ต้องโรล เช็ค และ ไม่นับเป็น Action",
+          "สูงสุด 2 ครั้งต่อ Turns"
+        ]},
+        { "text": "หากพันธมิตรที่ถูกเลือก ทั้ง 3 คน โจมตีสำเร็จภายใน Turn เดียวกัน", "children": [
+          "Arthur จะทำ Follow-up Attack เพิ่มเติม **3d8**",
+          "การโจมตีนี้ไม่สามารถถูก Counter ได้",
+          "เป้าหมาย **Stun** ใน Turnหน้า",
+          "Arthur ได้รับ 3 [Sovereign Will]"
+        ]}
+      ]
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Caliburn: Golden Sword of the Victorious",
+      "type": "Holy Sword",
+      "description": "ดาบศักดิ์สิทธิ์ ที่ถูกปักอยู่ในหิน ว่ากันว่าผู้ใดที่สามารถดึงมันออกมาได้ จะได้เป็นกษัตริย์\nที่อยู่ของดาบcaliburn นั้นถูกปักอยู่ใกล้อาณาจักร ที่ล้มสลาย *Endoxos* ปัจุบันดาบได้ถูกดึงไปแล้วโดยใครบางคน",
+      "skills": [
+        {
+          "name": "Slash Trinity",
+          "cooldown": "3 CD",
+          "description": [
+            "ฟันคลื่นดาบไปข้างหน้า 3คลื่น โดยสามารถโจมตีได้ 3 เป้า หรือเป้าเดียว",
+            "1คลื่นทำดาเมจ **1d8**",
+            "แปะ 1 [Holy flame: Purgation] ต่อหนึ่งเป้าหมาย",
+            "หากใช้สกิลกับเป้าเดี่ยวทำดาเมจ **3d8**"
+          ]
+        },
+        {
+          "name": "Radiant Sovereign",
+          "cooldown": "5 CD",
+          "description": [
+            "ปักดาบลงพื้น",
+            "บัพดาเมจเพื่อน **30%**",
+            "และทำดาเมจ AOE **1d10** กับมอน ต่อturn",
+            "แปะ 1 [Holy flame: Purgation] ต่อพันธมิตรและฝั่งตรงข้าม",
+            "คงอยู่สูงสุด **3 turns**",
+            { "text": "ถ้ามี [Oaths of northwind's paladin : Arthur pendragon]", "children": [
+              "ล้างสถานะครึ่งนึงของทุกคนในทีนตอน Turn end ปัดเศษลง"
+            ]},
+            { "text": "ตอนใช้", "children": [
+              "ผู้ใช้จะได้รับโล่เป็นจำนวน **100% ของ hp**",
+              "และรับดาเมจน้อยลง **50%**",
+              "ผู้ใช้จะไม่สามารถเล่น action ใดๆได้",
+              "สามารถ cancel ตอนใดก็ได้"
+            ]}
+          ]
+        }
+      ]
+    }
+  ],
+  "runes": [
+    {
+      "name": "ᛏ - Tiwaz | Justice / Sacrifice",
+      "cost": "10 [Sovereign Will]",
+      "duration": "5 Turn",
+      "description": [
+        { "text": "เมื่อ พันธมิตรได้รับดาเมจ Arthur สามารถเลือกได้ว่า", "children": [
+          { "text": "รับดาเมจแทน", "children": [
+            "ดาเมจที่ได้รับลดลง **50%**",
+            "ได้รับ 2 [Sovereign Will]",
+            "สูงสุด 3 ครั้ง/turn"
+          ]}
+        ]},
+        { "text": "เมื่อโจมตี หากเป้าหมายมีคุณสมบัติ Evil, Demon, Unholy หรือ Threat to Humanity", "children": [
+          "ดาเมจเพิ่มขึ้น **20%**",
+          "แปะ 1 [Holy flame: Purgation]"
+        ]},
+        { "text": "เมื่อ [Le Morte d'Arthur] ถูก Trigger", "children": [
+          "ฟื้นฟู **10** [Sovereign Will]",
+          "ล้างสถานะทั้งทีม",
+          "[Unyielding Will] ลด Cooldown +1",
+          "Heal (Hpที่หายไปของArthur / 3) ให้พันธมิตรทุกคน"
+        ]}
+      ]
+    },
+    {
+      "name": "ᚨ - Ansuz | Divine Authority",
+      "cost": "10 [Sovereign Will]",
+      "duration": "4 Turn",
+      "description": [
+        { "text": "พันธมิตรทุกคน", "children": [
+          { "text": "ตอนจบ Turn", "children": [
+            "ลด Cooldown ทุก Skill **1 turn**"
+          ]},
+          "Charm/Despair/Frightened **Immunity**",
+          "**+3 roll** ในการกระทำที่เป็นผลดีต่อผู้อื่น"
+        ]}
+      ]
+    },
+    {
+      "name": "ᛉ - Algiz | Protection",
+      "cost": "10 [Sovereign Will]",
+      "description": [
+        { "text": "เมื่อ Arthur ปกป้อง หรือ รับการโจมตีแทน พันธมิตร", "children": [
+          "ได้รับ 2 [Sovereign Will]",
+          "พันธมิตร ได้รับ Heal **10% max hp**",
+          "Arthur ได้รับ โล่กันโจมตีหนึ่งครั้งใน Turn หน้า"
+        ]}
+      ]
+    },
+    {
+      "name": "ᛋ - Sowilo | Sun / Victory",
+      "cost": "15 [Sovereign Will]",
+      "duration": "3 Turn",
+      "description": [
+        { "text": "Arthur และพันธมิตรทั้งหมดได้รับ", "children": [
+          "**+20% Holy Damage**",
+          "**+2 Universal Rolls** (พันธมิตรเท่านั้น)",
+          "Fear / Despair **Immunity**",
+          { "text": "ทุกครั้งที่โจมตีสำเร็จ", "children": [
+            "ฟื้น HP **3% Max HP**"
+          ]}
+        ]},
+        { "text": "หาก Arthur อยู่ในสถานะ [Oaths of northwind's paladin : Arthur pendragon]", "children": [
+          "การโจมตีทั้งหมดสร้าง Holy Damage เพิ่มอีก **25%**",
+          "และแปะ 1 [Holy flame: Purgation]"
+        ]}
+      ]
+    },
+    {
+      "name": "ᛟ - Othala | Heritage",
+      "cost": "15 [Sovereign Will]",
+      "duration": "3 Turn",
+      "description": [
+        { "text": "เลือก พันธมิตร 1 คน", "children": [
+          "ได้ บัพ Roll, Damage, Damage Reduction และ อื่นๆ ของ Arthur"
+        ]},
+        { "text": "เมื่อ Arthur ตาย", "children": [
+          "Arthur เลือก 1 rune ของเขาส่งต่อให้"
+        ]}
+      ]
+    }
+  ]
+}
