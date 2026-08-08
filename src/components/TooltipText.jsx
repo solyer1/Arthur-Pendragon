@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import DescriptionList from './DescriptionList';
 
 /* ===== Single Tooltip Popover ===== */
-const Tooltip = ({ term, description, children }) => {
+const Tooltip = ({ term, description, children, uniqueStatuses }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [pos, setPos] = useState('top');
   const ref = useRef(null);
@@ -40,7 +41,9 @@ const Tooltip = ({ term, description, children }) => {
             <div className="tooltip-title">
               <span>✦</span> {term}
             </div>
-            <div className="tooltip-body">{description}</div>
+            <div className="tooltip-body">
+              <DescriptionList description={description} uniqueStatuses={uniqueStatuses} />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -84,7 +87,7 @@ const TooltipText = ({ text, uniqueStatuses }) => {
     <>
       {parts.map((part, i) =>
         part.type === 'tooltip' ? (
-          <Tooltip key={i} term={part.term} description={part.description}>
+          <Tooltip key={i} term={part.term} description={part.description} uniqueStatuses={uniqueStatuses}>
             [{part.term}]
           </Tooltip>
         ) : (
