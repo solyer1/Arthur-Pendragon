@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Save, AlertCircle, Check, Download, Upload } from 'lucide-react';
+import { Save, AlertCircle, Check, Download, Upload, RotateCcw } from 'lucide-react';
 
-const Editor = ({ data, onSave }) => {
+const Editor = ({ data, onSave, onResetToDefault }) => {
   const [jsonText, setJsonText] = useState(JSON.stringify(data, null, 2));
   const [error, setError] = useState(null);
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    setJsonText(JSON.stringify(data, null, 2));
+  }, [data]);
+
+  const handleReset = () => {
+    if (window.confirm("Reset all data to default? This will restore original skills and passives.")) {
+      if (onResetToDefault) onResetToDefault();
+      setError(null);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
+    }
+  };
 
   const handleSave = () => {
     try {
@@ -66,6 +79,9 @@ const Editor = ({ data, onSave }) => {
             <Upload size={14} /> Import
             <input type="file" accept=".json" onChange={handleImport} style={{ display: 'none' }} />
           </label>
+          <button className="btn btn-ghost" onClick={handleReset} title="Restore original skills, stats, and passives">
+            <RotateCcw size={14} /> Reset Default
+          </button>
           <button className="btn btn-ghost" onClick={handleExport}>
             <Download size={14} /> Export
           </button>

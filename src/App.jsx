@@ -8,8 +8,20 @@ import { Moon, Sun, Swords, BookOpen, Settings } from 'lucide-react';
 function App() {
   const [activeTab, setActiveTab] = useState('play');
   const [data, setData] = useState(() => {
-    const saved = localStorage.getItem('arthurData');
-    return saved ? JSON.parse(saved) : initialData;
+    try {
+      const saved = localStorage.getItem('arthurData');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (!parsed.version || parsed.version < (initialData.version || 2)) {
+          localStorage.setItem('arthurData', JSON.stringify(initialData));
+          return initialData;
+        }
+        return parsed;
+      }
+    } catch (e) {
+      console.error('Error loading arthurData from localStorage:', e);
+    }
+    return initialData;
   });
 
   const [theme, setTheme] = useState(() => {
@@ -80,11 +92,17 @@ function App() {
         </div>
       </nav>
 
-      {/* ===== Main Content ===== */}
+      {/* ===== Main Content (Preserved across tab switching) ===== */}
       <main className="main-content">
-        {activeTab === 'play' && <PlaySheet data={data} />}
-        {activeTab === 'showcase' && <Showcase data={data} />}
-        {activeTab === 'editor' && <Editor data={data} onSave={handleSaveData} />}
+        <div style={{ display: activeTab === 'play' ? 'block' : 'none' }}>
+          <PlaySheet data={data} />
+        </div>
+        <div style={{ display: activeTab === 'showcase' ? 'block' : 'none' }}>
+          <Showcase data={data} />
+        </div>
+        <div style={{ display: activeTab === 'editor' ? 'block' : 'none' }}>
+          <Editor data={data} onSave={handleSaveData} onResetToDefault={() => handleSaveData(initialData)} />
+        </div>
       </main>
     </div>
   );

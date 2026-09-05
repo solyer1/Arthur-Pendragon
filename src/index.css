@@ -1016,8 +1016,462 @@ body {
   border-color: var(--accent-gold);
 }
 
+/* ===== BUFF STATUS INDICATOR ===== */
+.buff-indicator-container {
+  padding: 1.2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.buff-indicator-container.is-collapsed {
+  padding: 0.8rem 1.2rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, var(--bg-secondary) 100%);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.buff-indicator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.buff-indicator-container:not(.is-collapsed) .buff-indicator-header {
+  margin-bottom: 1rem;
+}
+
+.buff-indicator-header:hover {
+  opacity: 0.95;
+}
+
+.buff-indicator-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.buff-column {
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.buff-col-myself {
+  border-color: rgba(212, 175, 55, 0.35);
+  background: linear-gradient(155deg, rgba(212, 175, 55, 0.07) 0%, var(--bg-tertiary) 70%);
+}
+
+.buff-col-team {
+  border-color: rgba(96, 165, 250, 0.35);
+  background: linear-gradient(155deg, rgba(96, 165, 250, 0.07) 0%, var(--bg-tertiary) 70%);
+}
+
+.buff-col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.buff-col-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.buff-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 0.5rem;
+}
+
+.buff-stat-card {
+  background: var(--bg-inset);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.4rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.buff-stat-val {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.buff-stat-val.uni {
+  color: var(--accent-blue-light);
+  text-shadow: 0 0 12px rgba(96, 165, 250, 0.35);
+}
+
+.buff-stat-val.dmg {
+  color: var(--accent-gold);
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+}
+
+.buff-stat-val.pct {
+  color: var(--accent-green-light);
+}
+
+.buff-stat-val.res {
+  color: #f59e0b;
+}
+
+.buff-stat-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.buff-breakdown-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+}
+
+.buff-chip {
+  font-size: 0.68rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 99px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.buff-chip.active {
+  border-color: rgba(212, 175, 55, 0.4);
+  color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.06);
+}
+
+.buff-chip.highlight-gold {
+  border-color: rgba(212, 175, 55, 0.5);
+  color: var(--accent-gold);
+}
+
+.buff-chip.highlight-blue {
+  border-color: rgba(96, 165, 250, 0.5);
+  color: var(--accent-blue-light);
+}
+
+.buff-aura-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.buff-aura-pill.active {
+  border-color: var(--accent-gold);
+  background: var(--accent-gold-bg);
+  color: var(--text-primary);
+}
+
+.tactical-conditions-panel {
+  margin-top: 0.9rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.8rem;
+}
+
+.condition-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.condition-toggle-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 140px;
+}
+
+.condition-pill-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.condition-pill-btn:hover {
+  border-color: var(--accent-gold);
+  color: var(--text-primary);
+}
+
+.condition-pill-btn.active {
+  background: var(--accent-gold);
+  color: #0b0f19;
+  border-color: var(--accent-gold);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--accent-gold-glow);
+}
+
+/* ===== ALL AVAILABLE BUFFS ACCORDION & DIRECTORY ===== */
+.all-buffs-accordion {
+  margin-top: 1.2rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.8rem;
+}
+
+.all-buffs-accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.all-buffs-accordion-header:hover {
+  border-color: var(--accent-gold);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.08) 0%, var(--bg-tertiary) 100%);
+}
+
+.all-buffs-collapsed-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  margin-top: 0.4rem;
+  background: var(--bg-inset);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-wrap: wrap;
+}
+
+.all-buffs-collapsed-preview:hover {
+  border-color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.all-buffs-roster-body {
+  margin-top: 0.8rem;
+}
+
+.all-buffs-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.buff-search-input {
+  background: var(--bg-inset);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 0.35rem 0.6rem;
+  font-size: 0.75rem;
+  min-width: 200px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.buff-search-input:focus {
+  border-color: var(--accent-gold);
+}
+
+.all-buffs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Compact List View */
+.all-buffs-compact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.buff-compact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.buff-compact-row:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-secondary);
+}
+
+.buff-compact-row.is-active {
+  border-color: rgba(212, 175, 55, 0.5);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.08) 0%, var(--bg-tertiary) 100%);
+}
+
+.buff-compact-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+}
+
+.buff-compact-row.is-active .buff-compact-name {
+  color: var(--accent-gold);
+}
+
+.buff-compact-bonus {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-blue-light);
+}
+
+.buff-compact-row.is-active .buff-compact-bonus {
+  color: var(--accent-gold);
+}
+
+.buff-roster-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.buff-roster-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+
+.buff-roster-card.is-active {
+  border-color: rgba(212, 175, 55, 0.6);
+  background: linear-gradient(155deg, rgba(212, 175, 55, 0.08) 0%, var(--bg-tertiary) 100%);
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.12);
+}
+
+.buff-roster-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.buff-roster-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.buff-roster-card.is-active .buff-roster-name {
+  color: var(--accent-gold);
+}
+
+.buff-status-pill {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.buff-status-pill.active {
+  background: var(--accent-green-bg);
+  color: var(--accent-green-light);
+  border: 1px solid var(--accent-green);
+}
+
+.buff-status-pill.standby {
+  background: var(--bg-inset);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+}
+
+.buff-roster-bonus {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-blue-light);
+}
+
+.buff-roster-card.is-active .buff-roster-bonus {
+  color: var(--accent-gold);
+}
+
+.buff-roster-desc {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.buff-roster-trigger {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
+  .buff-indicator-grid { grid-template-columns: 1fr; }
+  .all-buffs-grid { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
   .app-header { padding: 0 1rem; }
   .nav-tabs { padding: 0 1rem; }

@@ -1,12 +1,13 @@
 {
+  "version": 2,
   "stats": {
     "class": "Sacred Paladin",
-    "dexterity": 19,
+    "dexterity": 20,
     "wisdom": 12,
     "constitution": 15,
     "charisma": 20,
     "strength": 15,
-    "intelligence": 12,
+    "intelligence": 11,
     "armorClass": 14,
     "health": 190,
     "alignment": "Neutral Good"
@@ -152,7 +153,7 @@
         "ทำดาเมจ **(Stack(s) x 2)** ทุกturn",
         "หมดอายุ 1 Stacks หลังจาก 2 turn",
         "หากถูกแปะทับก่อนหมดอายุ จะนับ turn ใหม่",
-        "ทับซ่อนได้สูงสุด **20**"
+        "ทับซ่อนได้สูงสุด **10**"
       ]
     },
     {
@@ -212,6 +213,13 @@
         "เมื่อมีสถานะนี้ การทำ action ที่มีผลประโยชต่อคนๆนั้น **+4 universal roll**",
         "เมื่อทำการ synergy กันจะให้ **advantage**",
         "จะไม่มีวันได้ universal roll ต่ำกว่า **10**"
+      ]
+    },
+    {
+      "name": "Despair",
+      "description": [
+        "ศัตรูไม่สามารถลบสถานะนี้ได้เป็นเวลา 2 turns",
+        "พันธมิตรได้รับ **Despair Resistance** จากพาสซีฟ The Influence Of Destined King's"
       ]
     },
     {
@@ -278,6 +286,23 @@
         "ศัตรูติด **Stun** ใน Turns หน้า",
         "ศัตรูที่โดนล้างสถานะรับ ดามเมจ **4d8**",
         "หากไม่ได้โดนล้างสถานะ รับดาเมจ **2d8**"
+      ]
+    },
+    {
+      "name": "Wall Of Storm",
+      "level": 5,
+      "type": "Skill",
+      "duration": "3 Turns",
+      "description": [
+        "เมื่ออาร์เธอร์ วาดเส้นลงบนพื้น สายลมที่สามารถเชื้อนได้แม้แต่เหล็กก็ขั้นทางของเป้าหมาย",
+        "**Duration:** 3 Turn",
+        "ศัตรูต้อง Roll Check Dexterity ให้ได้ **>= 14**",
+        { "text": "ถ้าสำเร็จ", "children": ["ไม่ได้รับ effect"] },
+        { "text": "หากโรลไม่สำเร็จ", "children": [
+          "ได้รับดาเมจ **2d8**",
+          "แปะ **2 [Slicing Gale]**",
+          "แปะ **2 [Slow]**"
+        ]}
       ]
     },
     {
@@ -392,6 +417,32 @@
           "Arthur ได้รับ 3 [Sovereign Will]"
         ]}
       ]
+    },
+    {
+      "name": "The False King's Miracle: Excalibur (Superimposition)",
+      "level": 18,
+      "type": "Ultimate",
+      "cost": "30 [Sovereign Will]",
+      "cooldown": "2 Long Rest, 1 Short Rest",
+      "duration": "3 Turns",
+      "description": [
+        "*\"ลมหายใจแห่งดวงดาว แสงสว่างแห่งความหวังที่รวมเป็นหนึ่ง... แม้จะเป็นเพียงภาพลวงตา แต่แสงนี้จะฉีกกระชากทุกความมืดมิด! จงเอ่ยนามแห่งดาบศักดิ์สิทธิ์ — เอ็กซ์คาลิเบอร์!!\"*",
+        "จ่าย **30 [Sovereign Will]**, 2 Long Rest และ 1 Short Rest",
+        { "text": "คุณสมบัติทะลวงการป้องกัน:", "children": [
+          "**Ignore Invisibility & Flight**",
+          "**Ignore Evasion & Invincibility**",
+          "**Ignore AC & Armor**"
+        ]},
+        "ทำดาเมจ **12d12 x 2 Aoe**",
+        "แปะ **10 [Slicing Gale]** และ **10 [Holy flame: Purgation]**",
+        "หลังจบ Turn Triggers ทุกสถานะ",
+        "หากยังมี ศัตรูเหลืออยู่ ศัตรูทุกตนได้รับ **[Despair]** ไม่สามารถลบได้เป็นเวลา 2 turns",
+        { "text": "ผลต่อพันธมิตร:", "children": [
+          "พันธมิตรได้รับ **Heal 50% Max HP**",
+          "**+3 Universal Roll** เป็นเวลา 3 Turns"
+        ]},
+        "หลังจบการต่อสู้นี้ Arthur เป็น **อัมพาต 1 Session**"
+      ]
     }
   ],
   "weapons": [
@@ -399,6 +450,23 @@
       "name": "Caliburn: Golden Sword of the Victorious",
       "type": "Holy Sword",
       "description": "ดาบศักดิ์สิทธิ์ ที่ถูกปักอยู่ในหิน ว่ากันว่าผู้ใดที่สามารถดึงมันออกมาได้ จะได้เป็นกษัตริย์\nที่อยู่ของดาบcaliburn นั้นถูกปักอยู่ใกล้อาณาจักร ที่ล้มสลาย *Endoxos* ปัจุบันดาบได้ถูกดึงไปแล้วโดยใครบางคน",
+      "passives": [
+        {
+          "name": "Sword Of Selection",
+          "description": [
+            { "text": "เมื่อเข้าสู่ Combat Phase ทอยเหรียญ (Heads/Tails):", "children": [
+              { "text": "**Heads**", "children": [
+                "ได้รับ **+1 Universal Roll**",
+                "ได้รับ **+5% Damage**"
+              ]},
+              { "text": "**Tails**", "children": [
+                "ไม่มีผลเพิ่มเติมเริ่มต้น",
+                "แต่เมื่อ Arthur จัดการศัตรูลงได้ 1 ตัว ได้รับ **+1 Universal Roll** (สูงสุด 3 ครั้ง)"
+              ]}
+            ]}
+          ]
+        }
+      ],
       "skills": [
         {
           "name": "Slash Trinity",

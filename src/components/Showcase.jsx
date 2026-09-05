@@ -113,6 +113,21 @@ const Showcase = ({ data }) => {
                       : <DescriptionList description={w.description} uniqueStatuses={uniqueStatus} />
                     }
                   </div>
+                  {w.passives && w.passives.length > 0 && (
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-gold)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.4rem' }}>
+                        ✦ Weapon Passives
+                      </div>
+                      <div className="stack">
+                        {w.passives.map((wp, pi) => (
+                          <div key={pi} className="card" style={{ padding: '0.8rem 1rem', background: 'var(--bg-secondary)', borderLeft: '3px solid var(--accent-gold)' }}>
+                            <div style={{ fontWeight: 700, color: 'var(--accent-gold)', marginBottom: '0.3rem', fontSize: '0.9rem' }}>{wp.name}</div>
+                            <DescriptionList description={wp.description} uniqueStatuses={uniqueStatus} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   <div className="stack">
                     {w.skills.map((ws, j) => (
                       <div key={j} className="card" style={{ padding: '0.8rem 1rem' }}>
