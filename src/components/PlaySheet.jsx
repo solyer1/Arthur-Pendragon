@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion';
 import DescriptionList from './DescriptionList';
 import TooltipText from './TooltipText';
+import HpCalculator from './HpCalculator';
 import {
   RotateCcw, Zap, Clock, SkipForward, Swords, Shield, Wind, Heart,
   Plus, Minus, Sparkles, Users, Crown, Flame, Award, ChevronDown, ChevronUp, User, Search
@@ -90,6 +91,7 @@ const PlaySheet = ({ data }) => {
   const [turn, setTurn] = useState(() => savedState?.turn ?? 1);
   const [currentHp, setCurrentHp] = useState(() => savedState?.currentHp ?? stats.health);
   const [maxHp, setMaxHp] = useState(() => savedState?.maxHp ?? stats.health);
+  const [shield, setShield] = useState(() => savedState?.shield ?? 0);
   const [cooldowns, setCooldowns] = useState(() => {
     const cd = {};
     allSkills.forEach(s => { cd[s.name] = savedState?.cooldowns?.[s.name] ?? 0; });
@@ -120,6 +122,7 @@ const PlaySheet = ({ data }) => {
   const [log, setLog] = useState(() => savedState?.log ?? []);
   const [swQuickAdd, setSwQuickAdd] = useState(5);
   const [notifications, setNotifications] = useState([]);
+  const [showTurnBriefing, setShowTurnBriefing] = useState(true);
   // Persistent collapse states
   const [showBuffIndicator, setShowBuffIndicator] = useState(() => {
     try {
@@ -186,6 +189,7 @@ const PlaySheet = ({ data }) => {
         turn,
         currentHp,
         maxHp,
+        shield,
         cooldowns,
         statusCounters,
         activeStatuses,
@@ -197,9 +201,17 @@ const PlaySheet = ({ data }) => {
     } catch (e) {
       console.error('Failed to save combat state to localStorage:', e);
     }
-  }, [turn, currentHp, maxHp, cooldowns, statusCounters, activeStatuses, activeDurations, combatConditions, log]);
+  }, [turn, currentHp, maxHp, shield, cooldowns, statusCounters, activeStatuses, activeDurations, combatConditions, log]);
 
   // ===== NOTIFICATIONS =====
+  const initialAlertFiredRef = useRef(false);
+  useEffect(() => {
+    if (turn === 1 && !initialAlertFiredRef.current) {
+      initialAlertFiredRef.current = true;
+      notify('⚡ Turn 1: สมาชิกทุกคนในทีมได้รับ [Inspired] เป็นเวลา 1 Turn (+4 Beneficial Roll, Min Roll 10, Synergy Advantage) & Arthur ได้รับ +1 [Sovereign Will] & [Compressed Winds]!', 'success');
+    }
+  }, [turn]);
+
   const notify = useCallback((message, type = 'info') => {
     const id = Date.now();
     setNotifications(prev => [...prev, { id, message, type }]);
@@ -804,6 +816,15 @@ const PlaySheet = ({ data }) => {
           <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Battle progress automatically saved</div>
         </div>
         <div className="turn-actions">
+          <button
+            className={`btn btn-sm ${showTurnBriefing ? 'btn-primary' : 'btn-ghost'}`}
+            onClick={() => setShowTurnBriefing(prev => !prev)}
+            style={{ fontSize: '0.76rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}
+            title="ดูสรุปสิ่งที่ได้รับและสิ่งที่ต้องทำในเทิร์นนี้"
+          >
+            <Zap size={13} style={{ color: 'var(--accent-gold)' }} />
+            <span>Turn {turn} Briefing</span>
+          </button>
           <button className="btn btn-reset-battle" onClick={handleResetBattle}>
             <RotateCcw size={14} /> Reset Battle
           </button>
@@ -813,64 +834,178 @@ const PlaySheet = ({ data }) => {
         </div>
       </div>
 
-      {/* ===== HP & Stats Bar ===== */}
-      <div className="card" style={{ padding: '1rem 1.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-          {/* HP Tracker */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
-            <div className="stat-label" style={{ fontSize: '0.65rem' }}>
-              <Heart size={12} style={{ color: hpColor }} /> HP
+      {/* ===== Arthur Turn Start Tactical Briefing Card ===== */}
+      {showTurnBriefing && (
+        <div className="turn-briefing-card card">
+          <div className="turn-briefing-header">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+              <div className="turn-briefing-badge">
+                <Zap size={18} />
+              </div>
+              <div>
+                <div className="turn-briefing-title">
+                  ⚡ Turn {turn} Start: Sacred Paladin Tactical Checklist
+                </div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  แจ้งเตือนสรุปสิ่งที่ได้รับอัตโนมัติ และสิ่งที่ต้องทำใน Turn Start
+                </div>
+              </div>
             </div>
-            <div className="hp-tracker">
-              <button className="counter-btn" onClick={() => setCurrentHp(prev => Math.max(0, prev - 1))}>−</button>
-              <input
-                type="number"
-                className="hp-input"
-                value={currentHp}
-                onChange={(e) => setCurrentHp(Math.max(0, parseInt(e.target.value) || 0))}
-                style={{ color: hpColor }}
-              />
-              <span className="hp-separator">/</span>
-              <span className="hp-max">{maxHp}</span>
-              <button className="counter-btn" onClick={() => setCurrentHp(prev => Math.min(maxHp, prev + 1))}>+</button>
-            </div>
-            {/* HP Bar */}
-            <div style={{
-              width: '100%', height: 4, borderRadius: 2,
-              background: 'var(--bg-tertiary)', overflow: 'hidden', minWidth: 120
-            }}>
-              <div style={{
-                width: `${hpPercent}%`, height: '100%', borderRadius: 2,
-                background: hpColor, transition: 'width 0.3s ease, background 0.3s ease'
-              }} />
-            </div>
+            <button
+              className="btn btn-ghost btn-sm"
+              onClick={() => setShowTurnBriefing(false)}
+              style={{ fontSize: '0.75rem', padding: '0.25rem 0.65rem' }}
+              title="ซ่อนการแจ้งเตือน"
+            >
+              ✕ รับทราบ (Dismiss)
+            </button>
           </div>
 
-          {/* Quick Stats */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', flex: 1, justifyContent: 'center' }}>
+          <div className="turn-briefing-grid">
+            {/* สิ่งที่ได้รับอัตโนมัติ */}
+            <div className="turn-briefing-col received">
+              <div className="briefing-col-title" style={{ color: 'var(--accent-green, #10b981)' }}>
+                🎁 สิ่งที่ได้รับอัตโนมัติ (Turn Start Gains):
+              </div>
+              <ul className="briefing-list">
+                {turn === 1 && (
+                  <li>
+                    <strong style={{ color: 'var(--accent-gold)' }}>✨ สมาชิกทุกคนในทีมได้รับ [Inspired] (1 Turn)</strong>
+                    <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                      เมื่อเข้าร่วม Battle: สมาชิกทุกคนในทีมจะได้รับสถานะ <code>[Inspired]</code> เป็นเวลา 1 Turn ทันที:
+                    </span>
+                    <div style={{ marginTop: '0.25rem', padding: '0.35rem 0.6rem', background: 'rgba(212, 175, 55, 0.12)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(212, 175, 55, 0.3)', fontSize: '0.74rem', lineHeight: 1.5 }}>
+                      <span style={{ color: 'var(--accent-gold)', fontWeight: 700 }}>• +4 Universal Roll</span> เมื่อทำ Action ที่มีผลประโยชน์ต่อผู้อื่น<br />
+                      <span style={{ color: '#10b981', fontWeight: 700 }}>• Min Roll 10</span> (ทอยเต๋าได้ 10 ขึ้นไปเสมอ)<br />
+                      <span style={{ color: '#60a5fa', fontWeight: 700 }}>• Synergy Advantage</span> (ได้เปรียบในการประสานงาน)
+                    </div>
+                  </li>
+                )}
+                <li>
+                  <strong>+1 [Sovereign Will]</strong> (จากพาสซีฟ <em>Oaths Of The Kings</em>)
+                  <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    ได้รับ 1 หน่วยต่อ Turn เมื่อเข้าสู่ Combat (ทีมทำดาเมจทุก 5 ได้รับเพิ่ม สูงสุด 5/turn)
+                  </span>
+                </li>
+                <li>
+                  <strong>Stance [Compressed Winds] Active</strong>:
+                  <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    +2 Universal Roll, ศัตรู Dodge/Parry Disadvantage, Slicing Gale on Hit
+                  </span>
+                </li>
+                <li>
+                  <strong>Destined King's Influence & Despair Resistance</strong>:
+                  <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    +2 Atk/Dmg Roll, +10% Dmg Multiplier, ป้องกันอาการสิ้นหวัง (Despair) ตลอดเวลา
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* สิ่งที่ต้องทำใน Turn Start */}
+            <div className="turn-briefing-col actions">
+              <div className="briefing-col-title" style={{ color: 'var(--accent-gold, #f59e0b)' }}>
+                ⚔️ สิ่งที่ต้องทำตอนเริ่มเทิร์น (Action Checklist):
+              </div>
+              <ul className="briefing-list">
+                {turn === 1 && (
+                  <li>
+                    <strong style={{ color: 'var(--accent-gold)' }}>★ ประสานงานทีมด้วย [Inspired] (หมดเมื่อจบ Turn 1)</strong>
+                    <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                      เตือนให้เพื่อนร่วมทีมใช้ประโยชน์จาก <code>[Inspired]</code> ใน Turn 1 ในการช่วยเหลือ/ฮีล/บัพ เพื่อรับ +4 Universal Roll และการันตีทอยเต๋าไม่ต่ำกว่า 10!
+                    </span>
+                  </li>
+                )}
+                <li>
+                  <strong>1. ตรวจสอบ HP เพื่อนร่วมทีม (Courage To Protect Others)</strong>
+                  <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    เพื่อน &lt; 50% HP (+1 Uni ต่อคน) | &lt; 25% HP (+1 Dmg ต่อคน) | Fallen (+3 Uni, +3 Dmg)
+                  </span>
+                </li>
+                <li>
+                  <strong>2. ตั้งค่าดาบ Caliburn: Sword of Selection</strong>
+                  <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    เลือกสถานะเหรียญ Heads (+1 Uni, +5% Dmg) หรือ Tails (+1 ถึง +3 Uni ตามจำนวน Kills)
+                  </span>
+                </li>
+                <li>
+                  <strong>3. ตรวจสอบ Reaction "Ally Intercept"</strong>
+                  <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    Arthur สามารถรับการโจมตีแทนเพื่อนได้ด้วย +5 Defense Roll (1 ครั้ง/Turn)
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== Quick Stats Bar ===== */}
+      <div className="card" style={{ padding: '0.85rem 1.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
             <div className="stat-badge" style={{ minWidth: 60 }}>
               <div className="stat-label">AC</div>
               <div className="stat-value ac">{stats.armorClass}</div>
             </div>
-            <div className="stat-badge" style={{ minWidth: 60 }}>
+            <div className="stat-badge" style={{ minWidth: 55 }}>
               <div className="stat-label">STR</div>
               <div className="stat-value">{stats.strength}</div>
             </div>
-            <div className="stat-badge" style={{ minWidth: 60 }}>
+            <div className="stat-badge" style={{ minWidth: 55 }}>
               <div className="stat-label">DEX</div>
               <div className="stat-value">{stats.dexterity}</div>
             </div>
-            <div className="stat-badge" style={{ minWidth: 60 }}>
+            <div className="stat-badge" style={{ minWidth: 55 }}>
               <div className="stat-label">CON</div>
               <div className="stat-value">{stats.constitution}</div>
             </div>
-            <div className="stat-badge" style={{ minWidth: 60 }}>
+            <div className="stat-badge" style={{ minWidth: 55 }}>
+              <div className="stat-label">INT</div>
+              <div className="stat-value">{stats.intelligence}</div>
+            </div>
+            <div className="stat-badge" style={{ minWidth: 55 }}>
+              <div className="stat-label">WIS</div>
+              <div className="stat-value">{stats.wisdom}</div>
+            </div>
+            <div className="stat-badge" style={{ minWidth: 55 }}>
               <div className="stat-label">CHA</div>
               <div className="stat-value">{stats.charisma}</div>
             </div>
           </div>
+          {(stats.vulnerabilities || stats.resistances || stats.immunities) && (
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              {stats.vulnerabilities && (
+                <span className="badge" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#f87171', border: '1px solid rgba(239, 68, 68, 0.3)', fontSize: '0.72rem' }}>
+                  🛡️ Vul: {stats.vulnerabilities}
+                </span>
+              )}
+              {stats.resistances && (
+                <span className="badge" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', border: '1px solid rgba(59, 130, 246, 0.3)', fontSize: '0.72rem' }}>
+                  🛡️ Resist: {stats.resistances}
+                </span>
+              )}
+              {stats.immunities && (
+                <span className="badge" style={{ background: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid rgba(34, 197, 94, 0.3)', fontSize: '0.72rem' }}>
+                  🛡️ Immune: {stats.immunities}
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
+
+      {/* ===== Interactive HP & Damage Calculator Console ===== */}
+      <HpCalculator
+        currentHp={currentHp}
+        setCurrentHp={setCurrentHp}
+        maxHp={maxHp}
+        setMaxHp={setMaxHp}
+        shield={shield}
+        setShield={setShield}
+        onLog={addLog}
+        onNotify={notify}
+      />
 
       {/* ======================================================= */}
       {/* ===== BUFF STATUS INDICATOR (MYSELF & TEAM) =========== */}
